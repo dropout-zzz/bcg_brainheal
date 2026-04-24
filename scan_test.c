@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-char *
+const char *
 get_raw_keyword(char **);
 
-char *
+const char *
 get_raw_identifier(char **);
 
 #define TEST_CODE_01 "impl /main/ bringit\nthatsit\n"

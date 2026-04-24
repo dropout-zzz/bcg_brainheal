@@ -1,7 +1,7 @@
 #include "gap.h"
 #include "alphabet.h"
 
-char *
+const char *
 get_raw_keyword(char **cursor)
 {
   char *s;

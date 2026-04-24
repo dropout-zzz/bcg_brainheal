@@ -1,6 +1,6 @@
 #include "alphabet.h"
 
-char *
+const char *
 get_raw_identifier(char **cursor)
 {
   char *s;
