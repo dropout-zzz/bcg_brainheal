@@ -7,4 +7,5 @@ add_executable(scan_test
   scan/alphabet.c
   scan/keyword.c
   scan/identifier.c
+  scan/token.c
   scan_test.c)
