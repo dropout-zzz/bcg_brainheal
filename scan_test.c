@@ -3,6 +3,9 @@
 char *
 get_raw_keyword(char **);
 
+char *
+get_raw_identifier(char **);
+
 static void
 test01(void)
 {
@@ -12,6 +15,7 @@ test01(void)
   p = test_code;
 
   printf("first keyword: '%s'\n", get_raw_keyword(&p));
+  printf("identifier: '%s'\n", get_raw_identifier(&p));
 }
 
 int

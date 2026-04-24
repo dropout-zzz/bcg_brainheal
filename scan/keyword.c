@@ -6,15 +6,7 @@ is_gap_(char c)
   return 0;
 }
 
-static int
-is_alphabet_(char c)
-{
-  if (c > 'z')
-    return 0;
-  if (c < 'a')
-    return 0;
-  return 1;
-}
+#include "alphabet.h"
 
 char *
 get_raw_keyword(char **cursor)
@@ -31,7 +23,7 @@ get_raw_keyword(char **cursor)
       break;
     }
 
-    if (!is_alphabet_(c))
+    if (!is_alphabet(c))
       return 0;
   }
 
