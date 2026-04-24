@@ -6,10 +6,12 @@ get_raw_keyword(char **);
 char *
 get_raw_identifier(char **);
 
+#define TEST_CODE_01 "impl /main/ bringit\nthatsit\n"
+
 static void
 test01(void)
 {
-  char test_code[] = "impl /main/ bringit\nthatsit\n";
+  char test_code[] = TEST_CODE_01;
   char *p;
 
   p = test_code;
