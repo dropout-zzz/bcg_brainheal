@@ -1,11 +1,4 @@
-static int
-is_gap_(char c)
-{
-  if (c == ' ' || c == '\n')
-    return 1;
-  return 0;
-}
-
+#include "gap.h"
 #include "alphabet.h"
 
 char *
@@ -17,7 +10,7 @@ get_raw_keyword(char **cursor)
 
   for (p = s = *cursor; (c = *p); p++)
   {
-    if (is_gap_(c))
+    if (is_gap(c))
     {
       *p = '\0';
       break;
