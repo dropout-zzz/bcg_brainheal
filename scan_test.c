@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "scan/token.h"
+#include "token.h"
 
 const char *
 get_raw_keyword(char **);
