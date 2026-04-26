@@ -37,3 +37,12 @@ struct token
   };
   int pos;
 };
+
+int
+get_tokens(char **, struct token *, int);
+
+const char *
+pretty_tokenizer_err(int);
+
+void
+del_tokens(struct token *, int);

@@ -3,11 +3,8 @@
 #include <stdlib.h>
 #include "token.h"
 
-const char *
-get_raw_keyword(char **);
-
-const char *
-get_raw_identifier(char **);
+#include "keyword.h"
+#include "identifier.h"
 
 #define TEST_CODE_01 "impl /main/ bringit\nthatsit\n"
 
@@ -23,63 +20,7 @@ test01(void)
   printf("identifier: '%s'\n", get_raw_identifier(&p));
 }
 
-struct line_info
-{
-  const char *line;
-  int line_no;
-  int nth;
-};
-
-static void
-decode_line_info(char *s, int n, struct line_info *li)
-{
-  int line_no;
-  char *line;
-  char *p;
-  char c;
-
-  line_no = 1;
-
-  for (line = p = s; n; n--)
-  {
-    c = *p++;
-
-    switch (c)
-    {
-      case '\0':
-        goto stop_loop;
-      case '\n':
-        line_no++;
-        line = p;
-        break;
-    }
-  }
-
-stop_loop:
-
-  li->nth = p - line + 1;
-
-  for (; (c = *p); p++)
-  {
-    if (c == '\n')
-    {
-      *p = '\0';
-      break;
-    }
-  }
-
-  li->line_no = line_no;
-  li->line = line;
-}
-
-int
-get_tokens(char **, struct token *, int);
-
-const char *
-pretty_tokenizer_err(int);
-
-void
-del_tokens(struct token *, int);
+#include "diagnosis.h"
 
 static void
 test02(void)
@@ -135,9 +76,7 @@ test02(void)
   {
     printf("Tokenizer error: %s\n", pretty_tokenizer_err(err));
     decode_line_info(orig, p - test_code, &li);
-    printf("At line #%d, char #%d:\n", li.line_no, li.nth);
-    puts(li.line);
-    printf("%*s^\n", li.nth - 1, "");
+    print_full_line_info(&li);
   }
   else if (*p)
     printf("W: token buffer overran\n");

@@ -4,11 +4,8 @@
 #include "token.h"
 #include "gap.h"
 
-const char *
-get_raw_keyword(char **);
-
-const char *
-get_raw_identifier(char **);
+#include "keyword.h"
+#include "identifier.h"
 
 int
 get_tokens(char **cursor, struct token *arr, int n)
@@ -38,6 +35,7 @@ get_tokens(char **cursor, struct token *arr, int n)
     old_p = p;
 
     // dispatchable
+
     raw_identifier = get_raw_identifier(&p);
     if (raw_identifier)
     {
