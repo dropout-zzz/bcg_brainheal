@@ -15,6 +15,7 @@ get_tokens(char **cursor, struct token *arr, int n)
 {
   int err;
 
+  char *s;
   char *p;
   char tmp;
 
@@ -26,7 +27,7 @@ get_tokens(char **cursor, struct token *arr, int n)
 
   err = NO_ERROR;
 
-  for (p = *cursor; n; n--)
+  for (p = s = *cursor; n; n--)
   {
     while (is_gap(tmp = *p))
       p++;
@@ -34,21 +35,22 @@ get_tokens(char **cursor, struct token *arr, int n)
     if (!tmp)
       break;
 
-    // dispatchable
+    old_p = p;
 
+    // dispatchable
     raw_identifier = get_raw_identifier(&p);
     if (raw_identifier)
     {
       arr->kind = IDENTIFIER;
       arr->identifier = malloc(sizeof(struct identifier));
       arr->identifier->s = raw_identifier;
+      arr->pos = old_p - s;
       arr++;
       continue;
     }
 
     // try everything
 
-    old_p = p;
     raw_keyword = get_raw_keyword(&p);
     if (raw_keyword)
     {
@@ -67,6 +69,7 @@ get_tokens(char **cursor, struct token *arr, int n)
       arr->kind = KEYWORD;
       arr->keyword = malloc(sizeof(struct keyword));
       arr->keyword->kind = keyword_kind;
+      arr->pos = old_p - s;
       arr++;
       continue;
     }

@@ -35,4 +35,5 @@ struct token
     struct keyword *keyword;
     struct identifier *identifier;
   };
+  int pos;
 };
