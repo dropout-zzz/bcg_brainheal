@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "parse.h"
-#include "token.h"
 
 static int
 is_keyword_(struct token *tok, int what)
@@ -31,6 +30,7 @@ parse_func_impl_(struct token **cursor, struct impl_func *fi, int *err)
   }
 
   fi->name = p->identifier->s;
+  fi->name_tok = p;
 
   p++;
 

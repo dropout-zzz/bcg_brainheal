@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "token.h"
 #include "diagnosis.h"
 #include "parse.h"
 

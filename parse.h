@@ -1,3 +1,5 @@
+#include "token.h"
+
 enum
 {
   EXPECT_IDENTIFIER = 1,
@@ -14,6 +16,7 @@ enum
 struct impl_func
 {
   const char *name;
+  struct token *name_tok;
 };
 
 struct program_node
