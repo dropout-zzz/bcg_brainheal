@@ -43,6 +43,7 @@ get_tokens(char **cursor, struct token *arr, int n)
       arr->identifier = malloc(sizeof(struct identifier));
       arr->identifier->s = raw_identifier;
       arr->pos = old_p - s;
+      arr->len = p - old_p;
       arr++;
       continue;
     }
@@ -68,6 +69,7 @@ get_tokens(char **cursor, struct token *arr, int n)
       arr->keyword = malloc(sizeof(struct keyword));
       arr->keyword->kind = keyword_kind;
       arr->pos = old_p - s;
+      arr->len = p - old_p - 1;
       arr++;
       continue;
     }

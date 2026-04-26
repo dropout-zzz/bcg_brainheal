@@ -28,7 +28,7 @@ decode_line_info(char *s, int n, struct line_info *li)
 
 stop_loop:
 
-  li->nth = p - line + 1;
+  li->nth = p - line + 1 + n;
 
   for (; (c = *p); p++)
   {

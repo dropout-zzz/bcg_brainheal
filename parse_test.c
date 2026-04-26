@@ -5,6 +5,15 @@
 #include "diagnosis.h"
 #include "parse.h"
 
+struct program_node *
+get_program_tree(struct token **, int *);
+
+const char *
+pretty_parser_err(int);
+
+void
+del_program_tree(struct program_node *);
+
 int
 main()
 {
@@ -21,6 +30,11 @@ main()
   struct token buff[NTOK + 1];
   int err;
   struct line_info li;
+  struct token *tok;
+  struct program_node *tree;
+  struct program_node *node;
+  int pos;
+  struct token *last_tok;
 
   orig = strdup(test_code);
   p = test_code;
@@ -38,6 +52,42 @@ main()
     printf("cannot fully tokenize. token buffer overran.\n");
     goto out;
   }
+
+  tok = buff;
+  tree = get_program_tree(&tok, &err);
+
+  for (node = tree; node; node = node->next)
+  {
+    switch (node->kind)
+    {
+      case IMPL_FUNC:
+        printf("FuncImpl '%s'\n", node->impl_func->name);
+        break;
+      default:
+        printf("Fixme prog node %d not handled\n", node->kind);
+        break;
+    }
+  }
+
+  if (err)
+  {
+    printf("parser error: %s.\n", pretty_parser_err(err));
+
+    if (tok->kind || tok == buff)
+    {
+      pos = tok->pos;
+    }
+    else
+    {
+      last_tok = tok - 1;
+      pos = last_tok->pos + last_tok->len;
+    }
+
+    decode_line_info(orig, pos, &li);
+    print_full_line_info(&li);
+  }
+
+  del_program_tree(tree);
 
 out:
   del_tokens(buff, NTOK);

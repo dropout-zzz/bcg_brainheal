@@ -36,6 +36,7 @@ struct token
     struct identifier *identifier;
   };
   int pos;
+  int len;
 };
 
 int
