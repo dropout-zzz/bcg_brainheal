@@ -7,7 +7,9 @@
 #include "keyword.h"
 #include "identifier.h"
 
-int
+#define EXPORT __attribute__((__visibility__("default")))
+
+EXPORT int
 get_tokens(char **cursor, struct token *arr, int n)
 {
   int err;
@@ -85,7 +87,7 @@ after_kw:
   return err;
 }
 
-void
+EXPORT void
 del_tokens(struct token *arr, int n)
 {
   for (; n--; arr++)
@@ -107,7 +109,7 @@ del_tokens(struct token *arr, int n)
   }
 }
 
-const char *
+EXPORT const char *
 pretty_tokenizer_err(int err)
 {
   switch (err)
