@@ -13,6 +13,20 @@ pretty_parser_err(int);
 void
 del_program_tree(struct program_node *);
 
+static int
+get_pos_safe_(struct token *tok, struct token *arr)
+{
+  if (tok->kind != 0 || tok == &arr[0])
+  {
+    return tok->pos;
+  }
+  else
+  {
+    tok--;
+    return tok->pos + tok->len;
+  }
+}
+
 int
 main()
 {
@@ -32,8 +46,6 @@ main()
   struct token *tok;
   struct program_node *tree;
   struct program_node *node;
-  int pos;
-  struct token *last_tok;
 
   orig = strdup(test_code);
   p = test_code;
@@ -71,18 +83,7 @@ main()
   if (err)
   {
     printf("parser error: %s.\n", pretty_parser_err(err));
-
-    if (tok->kind || tok == buff)
-    {
-      pos = tok->pos;
-    }
-    else
-    {
-      last_tok = tok - 1;
-      pos = last_tok->pos + last_tok->len;
-    }
-
-    decode_line_info(orig, pos, &li);
+    decode_line_info(orig, get_pos_safe_(tok, buff), &li);
     print_full_line_info(&li);
   }
 
