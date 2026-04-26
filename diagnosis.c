@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "diagnosis.h"
 
-void
+#define EXPORT __attribute__((__visibility__("default")))
+
+EXPORT void
 decode_line_info(char *s, int n, struct line_info *li)
 {
   int line_no;
@@ -43,7 +45,7 @@ stop_loop:
   li->line = line;
 }
 
-void
+EXPORT void
 print_full_line_info(struct line_info *li)
 {
   printf("At line #%d, char #%d:\n", li->line_no, li->nth);

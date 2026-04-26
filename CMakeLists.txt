@@ -8,11 +8,15 @@ add_library(bcg_scanner SHARED
   scan/keyword.c
   scan/identifier.c
   scan/token.c)
+target_compile_options(bcg_scanner PRIVATE
+  -fvisibility=hidden)
 target_include_directories(bcg_scanner PUBLIC
   scan)
 
 add_library(bcg_diagnosis SHARED
   diagnosis.c)
+target_compile_options(bcg_diagnosis PRIVATE
+  -fvisibility=hidden)
 
 add_executable(scan_test
   scan_test.c)

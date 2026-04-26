@@ -1,6 +1,6 @@
 #include "alphabet.h"
 
-const char *
+__attribute__((__visibility__("default"))) const char *
 get_raw_identifier(char **cursor)
 {
   char *s;
