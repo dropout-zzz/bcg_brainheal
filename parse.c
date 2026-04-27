@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "parse.h"
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 static int
 is_keyword_(struct token *tok, int what)
 {
@@ -57,7 +59,7 @@ out:
   return 1;
 }
 
-const char *
+EXPORT const char *
 pretty_parser_err(int err)
 {
   switch (err)
@@ -77,7 +79,7 @@ pretty_parser_err(int err)
   }
 }
 
-struct program_node *
+EXPORT struct program_node *
 get_program_tree(struct token **cursor, int *err)
 {
   struct program_node top;
@@ -117,7 +119,7 @@ get_program_tree(struct token **cursor, int *err)
   return top.next;
 }
 
-void
+EXPORT void
 del_program_tree(struct program_node *tree)
 {
   struct program_node *last;

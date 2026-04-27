@@ -52,3 +52,17 @@ print_full_line_info(struct line_info *li)
   puts(li->line);
   printf("%*s^\n", li->nth - 1, "");
 }
+
+EXPORT int
+get_pos_safe(struct token *tok, struct token *arr)
+{
+  if (tok->kind != 0 || tok == &arr[0])
+  {
+    return tok->pos;
+  }
+  else
+  {
+    tok--;
+    return tok->pos + tok->len;
+  }
+}
