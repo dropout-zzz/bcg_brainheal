@@ -4,29 +4,6 @@
 #include "diagnosis.h"
 #include "parse.h"
 
-struct program_node *
-get_program_tree(struct token **, int *);
-
-const char *
-pretty_parser_err(int);
-
-void
-del_program_tree(struct program_node *);
-
-static int
-get_pos_safe_(struct token *tok, struct token *arr)
-{
-  if (tok->kind != 0 || tok == &arr[0])
-  {
-    return tok->pos;
-  }
-  else
-  {
-    tok--;
-    return tok->pos + tok->len;
-  }
-}
-
 int
 main()
 {
@@ -83,7 +60,7 @@ main()
   if (err)
   {
     printf("parser error: %s.\n", pretty_parser_err(err));
-    decode_line_info(orig, get_pos_safe_(tok, buff), &li);
+    decode_line_info(orig, get_pos_safe(tok, buff), &li);
     print_full_line_info(&li);
   }
 

@@ -28,3 +28,12 @@ struct program_node
   };
   struct program_node *next;
 };
+
+struct program_node *
+get_program_tree(struct token **, int *);
+
+const char *
+pretty_parser_err(int);
+
+void
+del_program_tree(struct program_node *);
