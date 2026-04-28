@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "parse.h"
 
 #define EXPORT __attribute__((__visibility__("default")))
@@ -88,6 +89,7 @@ get_program_tree(struct token **cursor, int *err)
 
   struct impl_func fi;
   int e;
+  void *tmp;
 
   node = &top;
   *err = 0;
@@ -104,8 +106,8 @@ get_program_tree(struct token **cursor, int *err)
 
       node = node->next = malloc(sizeof(struct program_node));
       node->kind = IMPL_FUNC;
-      node->impl_func = malloc(sizeof(struct impl_func));
-      node->impl_func->name = fi.name;
+      tmp = node->impl_func = malloc(sizeof(struct impl_func));
+      memcpy(tmp, &fi, sizeof(struct impl_func));
       continue;
     }
 
