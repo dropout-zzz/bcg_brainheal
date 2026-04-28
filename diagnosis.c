@@ -48,9 +48,9 @@ stop_loop:
 EXPORT void
 print_full_line_info(struct line_info *li)
 {
-  printf("At line #%d, char #%d:\n", li->line_no, li->nth);
-  puts(li->line);
-  printf("%*s^\n", li->nth - 1, "");
+  fprintf(stderr, "At line #%d, char #%d:\n", li->line_no, li->nth);
+  fprintf(stderr, "%s\n", li->line);
+  fprintf(stderr, "%*s^\n", li->nth - 1, "");
 }
 
 EXPORT int
