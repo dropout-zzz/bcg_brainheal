@@ -8,10 +8,21 @@
 #include "parse.h"
 #include "compile.h"
 
+#define AUTOCLO __attribute__((__cleanup__(fd_exit_)))
+
+static void
+fd_exit_(int *ptr)
+{
+  close(*ptr);
+}
+
 int
 main(int argc, char *argv[])
 {
   char *ext;
+  AUTOCLO int fd;
+
+  fd = -1;
 
   if (argc != 2)
   {
@@ -30,6 +41,13 @@ main(int argc, char *argv[])
   if (strcmp(ext, "bg"))
   {
     fprintf(stderr, "input file name did not end with `.bg'\n");
+    return 1;
+  }
+
+  fd = open(argv[1], O_RDONLY);
+  if (fd < 0)
+  {
+    perror("cant open input file");
     return 1;
   }
 }
