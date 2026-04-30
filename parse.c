@@ -5,7 +5,7 @@
 
 #define EXPORT __attribute__((__visibility__("default")))
 
-static int
+static inline int
 is_keyword_(struct token *tok, int what)
 {
   if (tok->kind == KEYWORD
