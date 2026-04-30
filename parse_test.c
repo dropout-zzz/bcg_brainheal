@@ -27,7 +27,7 @@ main()
   orig = strdup(test_code);
   p = test_code;
 
-  err = get_tokens(&p, buff, NTOK);
+  err = get_tokens(&p, buff, NTOK, 0);
   if (err)
   {
     printf("tokenization error: %s.\n", pretty_tokenizer_err(err));
