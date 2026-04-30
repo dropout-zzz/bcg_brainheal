@@ -29,6 +29,7 @@ test02(void)
   char *p;
 #define TEST2_NTOK 10
   struct token buff[TEST2_NTOK + 1];
+  int count;
   int err;
   struct token *tok;
   struct line_info li;
@@ -36,7 +37,9 @@ test02(void)
   orig = strdup(test_code);
 
   p = test_code;
-  err = get_tokens(&p, buff, TEST2_NTOK);
+  err = get_tokens(&p, buff, TEST2_NTOK, &count);
+
+  printf("Token count: %d\n", count);
 
   for (tok = buff; tok->kind; tok++)
   {
@@ -69,8 +72,6 @@ test02(void)
     }
   }
 
-  printf("Token count: %lu\n", tok - buff);
-
   if (err)
   {
     printf("Tokenizer error: %s\n", pretty_tokenizer_err(err));
@@ -80,7 +81,7 @@ test02(void)
   else if (*p)
     printf("W: token buffer overran\n");
 
-  del_tokens(buff, TEST2_NTOK);
+  del_tokens(buff, count);
   free(orig);
 }
 

@@ -43,7 +43,7 @@ struct token
 };
 
 int
-get_tokens(char **, struct token *, int);
+get_tokens(char **, struct token *, int, int *);
 
 const char *
 pretty_tokenizer_err(int);

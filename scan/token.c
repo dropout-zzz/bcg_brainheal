@@ -10,10 +10,10 @@
 #define EXPORT __attribute__((__visibility__("default")))
 
 EXPORT int
-get_tokens(char **cursor, struct token *arr, int n)
+get_tokens(char **cursor, struct token *arr, int n, int *count)
 {
   int err;
-
+  struct token *item;
   char *s;
   char *p;
   char tmp;
@@ -25,6 +25,7 @@ get_tokens(char **cursor, struct token *arr, int n)
   int keyword_kind;
 
   err = NO_ERROR;
+  item = arr;
 
   for (p = s = *cursor; n; n--)
   {
@@ -41,12 +42,12 @@ get_tokens(char **cursor, struct token *arr, int n)
     raw_identifier = get_raw_identifier(&p);
     if (raw_identifier)
     {
-      arr->kind = IDENTIFIER;
-      arr->identifier = malloc(sizeof(struct identifier));
-      arr->identifier->s = raw_identifier;
-      arr->pos = old_p - s;
-      arr->len = p - old_p;
-      arr++;
+      item->kind = IDENTIFIER;
+      item->identifier = malloc(sizeof(struct identifier));
+      item->identifier->s = raw_identifier;
+      item->pos = old_p - s;
+      item->len = p - old_p;
+      item++;
       continue;
     }
 
@@ -67,12 +68,12 @@ get_tokens(char **cursor, struct token *arr, int n)
         goto after_kw;
       }
 
-      arr->kind = KEYWORD;
-      arr->keyword = malloc(sizeof(struct keyword));
-      arr->keyword->kind = keyword_kind;
-      arr->pos = old_p - s;
-      arr->len = p - old_p - 1;
-      arr++;
+      item->kind = KEYWORD;
+      item->keyword = malloc(sizeof(struct keyword));
+      item->keyword->kind = keyword_kind;
+      item->pos = old_p - s;
+      item->len = p - old_p - 1;
+      item++;
       continue;
     }
 
@@ -83,7 +84,11 @@ after_kw:
   }
 
   *cursor = p;
-  arr->kind = 0;
+  item->kind = 0;
+
+  if (count)
+    *count = item - arr;
+
   return err;
 }
 
