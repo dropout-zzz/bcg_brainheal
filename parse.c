@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "parse.h"
+#include "scan/token.h"
 
 #define EXPORT __attribute__((__visibility__("default")))
 

@@ -10,15 +10,11 @@ add_library(bcg_scanner SHARED
   scan/token.c)
 target_compile_options(bcg_scanner PRIVATE
   -fvisibility=hidden)
-target_include_directories(bcg_scanner PUBLIC
-  scan)
 
 add_library(bcg_diagnosis SHARED
   diagnosis.c)
 target_compile_options(bcg_diagnosis PRIVATE
   -fvisibility=hidden)
-target_link_libraries(bcg_diagnosis PRIVATE
-  bcg_scanner)
 
 add_executable(scan_test
   scan_test.c)
@@ -30,8 +26,6 @@ add_library(bcg_parser SHARED
   parse.c)
 target_compile_options(bcg_parser PRIVATE
   -fvisibility=hidden)
-target_link_libraries(bcg_parser PRIVATE
-  bcg_scanner)
 
 add_executable(parse_test
   parse_test.c)
@@ -42,8 +36,6 @@ target_link_libraries(parse_test
 
 add_library(compiler OBJECT
   compile.c)
-target_link_libraries(compiler PRIVATE
-  bcg_scanner)
 
 add_library(cgen OBJECT
   codegen.c)

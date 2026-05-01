@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "keyword.h"
-#include "identifier.h"
+#include "scan/keyword.h"
+#include "scan/identifier.h"
 
 #define TEST_CODE_01 "impl /main/ bringit\nthatsit\n"
 
@@ -20,6 +20,7 @@ test01(void)
 }
 
 #include "diagnosis.h"
+#include "scan/token.h"
 
 static void
 test02(void)

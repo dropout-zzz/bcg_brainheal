@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "diagnosis.h"
+#include "scan/token.h"
 
 #define EXPORT __attribute__((__visibility__("default")))
 
