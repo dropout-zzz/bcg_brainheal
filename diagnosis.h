@@ -1,4 +1,4 @@
-#include "token.h"
+struct token;
 
 struct line_info
 {

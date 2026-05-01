@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "diagnosis.h"
 #include "parse.h"
+#include "scan/token.h"
 
 int
 main()

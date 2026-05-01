@@ -9,6 +9,7 @@
 #include "diagnosis.h"
 #include "parse.h"
 #include "compile.h"
+#include "scan/token.h"
 
 #define AUTOCLO __attribute__((__cleanup__(fd_exit_)))
 

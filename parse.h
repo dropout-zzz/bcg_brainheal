@@ -1,4 +1,4 @@
-#include "token.h"
+struct token;
 
 enum
 {

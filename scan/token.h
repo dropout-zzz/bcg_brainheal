@@ -1,6 +1,3 @@
-#ifndef TOKEN_H
-#define TOKEN_H
-
 enum
 {
   KEYWORD = 1,
@@ -50,5 +47,3 @@ pretty_tokenizer_err(int);
 
 void
 del_tokens(struct token *, int);
-
-#endif
